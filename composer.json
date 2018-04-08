@@ -1,0 +1,12 @@
+{
+    "name": "roog/event-statistics",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Roger",
+            "email": "guxinpei@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
