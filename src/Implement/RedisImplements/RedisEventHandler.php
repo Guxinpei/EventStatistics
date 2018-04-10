@@ -105,7 +105,7 @@ class RedisEventHandler extends EventHandlerAbstract {
      * @throws \Exception
      */
     public function increaseHash($eventName, $num, $hash,$data=NULL) {
-        return parent::increaseHash($eventName, $num, $hash);
+        return parent::increaseHash($eventName, $num, $hash,$data);
     }
 
     /**
