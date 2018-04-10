@@ -32,7 +32,7 @@ abstract class EventRegisterAbstract implements EventRegisterInterface{
      * all eventList
      * @var array
      */
-    public $eventList;
+    public $eventList = [];
 
     /**
      * all event Callable
