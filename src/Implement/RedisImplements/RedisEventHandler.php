@@ -60,7 +60,7 @@ class RedisEventHandler extends EventHandlerAbstract {
      */
     public function increase($eventName, $num, $data=NULL) {
         if(!empty($this->register->eventList[$eventName])){
-            if(is_callable($this->register->eventList[$eventName])){
+            if(is_callable($this->register->eventCallable[$eventName])){
                 $num = $this->formatCallableNum($this->register[$eventName]($data));
             }
         }
