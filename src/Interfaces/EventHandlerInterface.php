@@ -73,4 +73,12 @@ Interface EventHandlerInterface {
      */
     public function hashExist($eventName,$hash);
 
+    /**
+     * createHash
+     * @param $eventName
+     * @param $hash
+     * @return mixed
+     */
+    public function createHash($eventName,$hash);
+
 }

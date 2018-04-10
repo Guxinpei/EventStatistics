@@ -5,13 +5,14 @@
  * Date: 2018/4/5/005
  * Time: 20:13
  */
+
 namespace EventStatistics\Abstracts;
 
 use EventStatistics\Exceptions\EventHandlerException;
 use EventStatistics\Interfaces\EventRegisterInterface;
 use EventStatistics\Interfaces\EventHandlerInterface;
 
-abstract class EventHandlerAbstract implements EventHandlerInterface{
+abstract class EventHandlerAbstract implements EventHandlerInterface {
 
     /**
      *  error return false
@@ -36,7 +37,7 @@ abstract class EventHandlerAbstract implements EventHandlerInterface{
      */
     public $register;
 
-    public function __construct(EventRegisterInterface $register,$errorMsgType = self::ERROR_FALSE) {
+    public function __construct(EventRegisterInterface $register, $errorMsgType = self::ERROR_FALSE) {
         $this->register = $register;
         $this->errorMsgType = $errorMsgType;
     }
@@ -52,13 +53,15 @@ abstract class EventHandlerAbstract implements EventHandlerInterface{
      * @return boolean
      * @throws \Exception
      */
-    public function increaseHash($eventName,$num,$hash,$data = NULL) {
+    public function increaseHash($eventName, $num, $hash, $data = NULL) {
 
-        if($this->hashExist($eventName,$hash)){
+        if ($this->hashExist($eventName, $hash)) {
             return $this->returnError('Hash has already existed');
         }
 
-        return $this->increase($eventName,$num,$data);
+        $this->createHash($eventName,$hash);
+
+        return $this->increase($eventName, $num, $data);
 
     }
 
@@ -73,13 +76,15 @@ abstract class EventHandlerAbstract implements EventHandlerInterface{
      * @param $data         mixed callable use it
      * @return boolean
      */
-    public function reduceHash ($eventName,$num,$hash,$data = NULL){
+    public function reduceHash($eventName, $num, $hash, $data = NULL) {
 
-        if($this->hashExist($eventName,$hash)){
+        if ($this->hashExist($eventName, $hash)) {
             return $this->returnError('Hash has already existed');
         }
 
-        return $this->reduce($eventName,$num);
+        $this->createHash($eventName,$hash);
+
+        return $this->reduce($eventName, $num);
 
     }
 
@@ -89,10 +94,10 @@ abstract class EventHandlerAbstract implements EventHandlerInterface{
      * @return bool
      * @throws EventHandlerException
      */
-    private function returnError($errMsg){
-        switch ($this->errorMsgType){
+    private function returnError($errMsg) {
+        switch ($this->errorMsgType) {
             case self::ERROR_EXCEPTION:
-                throw new EventHandlerException($errMsg,'');
+                throw new EventHandlerException($errMsg, '');
             case self::ERROR_FALSE:
                 return false;
             default:
@@ -105,13 +110,13 @@ abstract class EventHandlerAbstract implements EventHandlerInterface{
      * @param $num
      * @return int
      */
-    protected function formatCallableNum($num){
+    protected function formatCallableNum($num) {
 
-        if($num === true){
+        if ($num === true) {
             return 1;
         }
 
-        if($num === false){
+        if ($num === false) {
             return -1;
         }
 
@@ -119,5 +124,8 @@ abstract class EventHandlerAbstract implements EventHandlerInterface{
 
     }
 
+    protected function hash($hashData) {
+        return hash('sha256',serialize($hashData));
+    }
 
 }
