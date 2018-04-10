@@ -48,7 +48,7 @@ class RedisEventHandler extends EventHandlerAbstract {
      */
     public function getEventNum($eventName)
     {
-        $this->redis->get($this->prefix.'_'.$eventName);
+        return $this->redis->get($this->prefix.'_'.$eventName);
     }
 
     /**
