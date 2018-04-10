@@ -5,7 +5,7 @@
  * Time: 21:45
  */
 
-namespace EventStatistics\Implement\RedisImplement;
+namespace EventStatistics\Implement\RedisImplements;
 
 use EventStatistics\Abstracts\EventRegisterAbstract;
 
